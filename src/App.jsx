@@ -5,6 +5,7 @@ import { SignupPage } from "./SignupPage";
 import { LoginPage } from "./LoginPage";
 import { ToDoPage } from "./ToDoPage";
 import { Footer } from "./Footer";
+import { TodoIndex } from "./ToDoIndex";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginPage />,
+      },
+      {
+        path: "/index",
+        element: <TodoIndex />,
       },
     ],
   },
