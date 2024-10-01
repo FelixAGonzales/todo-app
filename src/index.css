@@ -1,3 +1,167 @@
-html {
-  scroll-behavior: smooth;
+/* General Settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #343a40;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+header nav a:hover {
+  color: #ffd700;
+}
+
+footer {
+  background-color: #343a40;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+h1, h2 {
+  margin-bottom: 1rem;
+}
+
+main {
+  padding: 2rem;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Form Styles */
+form {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+  margin-bottom: 1rem;
+}
+
+form input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+form button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #007bff;
+}
+
+/* To-Do List */
+.list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 1200px;
+}
+
+.list {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.list h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.list p {
+  margin-bottom: 0.5rem;
+}
+
+.list button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.list button:hover {
+  background-color: #0056b3;
+}
+
+/* Modal Styles (already defined in Modal.css) */
+.modal-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 80%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .list-container {
+    grid-template-columns: 1fr;
+  }
+
+  form {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .modal-main {
+    width: 95%;
+  }
 }
