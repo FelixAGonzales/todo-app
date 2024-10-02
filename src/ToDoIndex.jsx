@@ -6,15 +6,15 @@ import { useState } from "react";
 
 export function TodoIndex() {
   const [isListShowVisible, setIsListShowVisible] = useState(false);
-  const [currentList, setCurrentList] = useState ({});
+  const [currentList, setCurrentList] = useState (null);
   
   const list = [
-    {id: 1, title: "Buy Groceries", description: "Buy Bananas, Apples, Oranges", deadline: "10/01/2024"},
-    {id: 2, title: "File Taxes", description: "I need to file my taxes", deadline: "04/27/2025"},
+    {id: 1, title: "Buy Groceries", description: "Buy Bananas, Apples, Oranges", deadline: "10/01/2024", category: "Groceries" },
+    {id: 2, title: "File Taxes", description: "I need to file my taxes", deadline: "04/27/2025", category: "Personal"},
   ]
 
-  const handleShow = (list) => {
-    setCurrentList(list);
+  const handleShow = (listItem) => {
+    setCurrentList(listItem);
     setIsListShowVisible(true);
   };
 
