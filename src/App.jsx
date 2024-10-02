@@ -7,7 +7,6 @@ import { ToDoPage } from "./ToDoPage";
 import { Footer } from "./Footer";
 import { TodoIndex } from "./ToDoIndex";
 import { ToDoNew } from "./ToDoNewPage";
-import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +37,6 @@ const router = createBrowserRouter([
       {
         path: "/todo/new",
         element: <ToDoNew />,
-        // loader: () => axios.get("http://localhost:3000/categories.json")
       },
     ],
   },

@@ -1,14 +1,34 @@
 import axios from "axios"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-// import { useLoaderData } from "react-router-dom";
-// import React from "react";
 
 export function ToDoNew() {
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [showNewCategoryForm, setShowNewCategoryForm] = useState (false);
+  const [showNewCategoryForm, setShowNewCategoryForm] = useState(false);
   const [newCategory, setNewCategory] = useState('');
+  const [categoryUpdateTrigger, setCategoryUpdateTrigger] = useState(0);
+
+  useEffect(() => {
+    const fetchCategories = () => {
+      axios.get("http://localhost:3000/categories.json")
+        .then(response => {
+          console.log("API Response:", response.data);
+          if (Array.isArray(response.data)) {
+            setCategories(response.data);
+          } else {
+            console.error("Received data is not an array:", response.data);
+            setCategories([]);
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching categories:", error);
+        });
+    };
+
+    fetchCategories();
+  }, [categoryUpdateTrigger]);
 
   const handleCategoryChange = (event) => {
     const selected = event.target.value;
@@ -17,37 +37,41 @@ export function ToDoNew() {
 
     if (selected == 'add_new') {
       setShowNewCategoryForm(true);
-    } else{
+    } else {
       setShowNewCategoryForm(false);
     }
   };
 
-  const handeNewCategorySubmit = (category) => {
-    console.log(`New Category is: ${category}`);
-    setNewCategory(category);
-    setShowNewCategoryForm(false);
-    setSelectedCategory(category);
+  const handleNewCategorySubmit = (event) => {
+    event.preventDefault();
+    const params = new FormData();
+    params.append('name', newCategory);
+
+    axios.post("http://localhost:3000/categories.json", params)
+      .then(response => {
+        console.log(response.data);
+        setNewCategory('');
+        setShowNewCategoryForm(false);
+        setSelectedCategory(response.data.name);
+        setCategoryUpdateTrigger(prev => prev + 1);
+      })
+      .catch(error => {
+        console.error("Error creating new category", error);
+      });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    // console.log('handle submit')
     const params = new FormData(event.target)
     console.log("Form Data:");
     for (let [key, value] of params.entries()) {
       console.log(key + ': ' + value); 
     };
-    // axios.post ("http://localhost:3000/posts.json", params).then(response => {
-    //   console.log(response.data)
-    //   navigate('/');
-    // })
+    axios.post ("http://localhost:3000/todos.json", params).then(response => {
+      console.log(response.data)
+      navigate('/');
+    })
   };
-
-  const categories =[
-    {id:1, name:"Shopping"}, {id:2, name:"Work"}
-  ];
-
-  // const categories = useLoaderData()
   
   return (
     <div>
@@ -61,13 +85,13 @@ export function ToDoNew() {
         onChange={handleCategoryChange}>
         <option value=""> Select a category</option>
           {categories.map((category) => (
-            <option key = {category.id} value={category.name}>
+            <option key={category.id} value={category.name}>
               {category.name}
             </option>
           ))}
           <option value='add_new'>Add new</option>
         </select>
-        <br></br>
+        <br />
 
         {showNewCategoryForm && (
           <div>
@@ -78,11 +102,11 @@ export function ToDoNew() {
               onChange={(e) => setNewCategory(e.target.value)}
               placeholder="Enter new category"
             />
-            <button type="button" onClick={() => handeNewCategorySubmit(newCategory)}>Add Category</button>
+            <button type="button" onClick={handleNewCategorySubmit}>Add Category</button>
           </div>
         )}
 
-        <br></br>
+        <br />
         <div>
           Title: <input type="text" name="title" />
         </div>
@@ -92,10 +116,7 @@ export function ToDoNew() {
         <div>
           Deadline: <input type="date" name="deadline" />
         </div>
-        {/* <div>
-          Completed? <input type="checkbox" name="completed" />
-        </div> */}
-        <button type="submit"> Add</button>
+        <button type="submit">Add</button>
       </form>
     </div>
   );
