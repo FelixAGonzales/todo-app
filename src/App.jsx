@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import axios from "axios";
 
 import { Header } from "./Header";
 import { SignupPage } from "./SignupPage";
