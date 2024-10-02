@@ -34,6 +34,7 @@ const router = createBrowserRouter([
       {
         path: "/index",
         element: <TodoIndex />,
+        loader: () => axios.get("http://localhost:3000/todos.json").then(response => response.data)
       },
       {
         path: "/todo/new",

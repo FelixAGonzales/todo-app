@@ -1,5 +1,6 @@
 
-// import { useRouteLoaderData } from "react-router-dom";
+import { useRouteLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { ShowToDo } from "./ShowToDo";
 import { Modal } from "./Modal";
 import { useState } from "react";
@@ -8,10 +9,11 @@ export function TodoIndex() {
   const [isListShowVisible, setIsListShowVisible] = useState(false);
   const [currentList, setCurrentList] = useState (null);
   
-  const list = [
-    {id: 1, title: "Buy Groceries", description: "Buy Bananas, Apples, Oranges", deadline: "10/01/2024", category: "Groceries" },
-    {id: 2, title: "File Taxes", description: "I need to file my taxes", deadline: "04/27/2025", category: "Personal"},
-  ]
+  const  list = useLoaderData();
+  // const list = [
+  //   {id: 1, title: "Buy Groceries", description: "Buy Bananas, Apples, Oranges", deadline: "10/01/2024", category: "Groceries" },
+  //   {id: 2, title: "File Taxes", description: "I need to file my taxes", deadline: "04/27/2025", category: "Personal"},
+  // ]
 
   const handleShow = (listItem) => {
     setCurrentList(listItem);
